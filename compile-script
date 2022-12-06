@@ -1,0 +1,1 @@
+find | entr -c bash -c 'make sofle:odon && cp sofle_rev1_odon.hex /mnt/c/w/keyboard.hex'
