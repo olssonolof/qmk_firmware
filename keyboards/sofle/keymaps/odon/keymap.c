@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_swedish.h"
 #include "sendstring_swedish.h"
+#include "secrets.h"
 
 
 enum sofle_layers {
@@ -18,7 +19,10 @@ enum custom_keycodes {
     KC_LSTRT,
     KC_LEND,
     KC_DLINE,
-    MY_TILD
+    MY_TILD,
+    MY_BCKT,
+    MY_PASS,
+    MY_CIRC
 };
 
 #define ___X___ _______
@@ -31,11 +35,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |  ESC |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  | Bspc |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |    ""                |   Y  |   U  |   I  |   O  |   P  | Å    |
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |    ""              |   Y  |   U  |   I  |   O  |   P  | Å    |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LShift|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   Ö  |  Ä   |
+ * |  ESC |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   Ö  |  Ä   |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   -  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            | LGUI | LAlt |LCTRL |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -45,8 +49,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT(
   KC_ESC,   SE_1,   SE_2,    SE_3,    SE_4,    SE_5,                     SE_6,    SE_7,    SE_8,    SE_9,    SE_0,  KC_BSPC,
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  SE_ARNG,
-  KC_LSFT,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, SE_ODIA,  SE_ADIA,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     KC_SPC,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+  KC_ESC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, SE_ODIA,  SE_ADIA,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     KC_MUTE,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
                  KC_LGUI,KC_LALT,KC_LCTL, MO(_LOWER), KC_ENT,      KC_SPC,  MO(_RAISE), KC_RCTL, KC_RALT, KC_RGUI
 ),
 
@@ -57,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  |   |   !  |   "  |   #  |   $  |   %  |                    |   &  |   /  |   (  |   )  |   =  |   ?  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   `  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   (  |   )  |   |  |
+ * | Tab  |   `  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   (  |   \  |   ~  |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * | Shift|  <   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  | Shift|
+ * | Shift|  <   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   '  | Shift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
@@ -68,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT(
   SE_QUOT,   SE_1,    SE_2,    SE_3,    SE_4,    SE_5,                       SE_6,    SE_7,    SE_8,    SE_9,    SE_0,_______,
   SE_PIPE, SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL ,SE_QUES,
-  _______, MY_TILD, SE_AT, KC_HASH,  KC_DLR, KC_PERC,                       KC_CIRC, KC_AMPR, SE_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
+  _______, MY_BCKT, SE_AT, KC_HASH,  KC_DLR, KC_PERC,                       MY_CIRC, KC_AMPR, SE_ASTR, KC_LPRN, SE_BSLS, MY_TILD,
   _______, SE_LABK, KC_MINS, KC_PLUS, SE_LCBR, SE_RCBR, _______,       _______, SE_LBRC, SE_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
@@ -95,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * | MYPASS|      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | QK_BOOT|      |QWERTY|    |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -108,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
   [_ADJUST] = LAYOUT(
-  XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  MY_PASS , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   QK_BOOT  , XXXXXXX,KC_QWERTY,XXXXXXX,CG_TOGG,XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX,CG_TOGG, XXXXXXX,    XXXXXXX,  XXXXXXX,                     XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
@@ -196,9 +200,25 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MY_TILD:
+        case MY_BCKT:
             if (record->event.pressed) {
                 SEND_STRING("`");
+        }
+        break;
+        case MY_CIRC:
+            if (record->event.pressed) {
+                SEND_STRING("^");
+        }
+        break;
+        case MY_TILD:
+            if (record->event.pressed) {
+                SEND_STRING("~");
+        }
+        break;
+
+        case MY_PASS:
+            if (record->event.pressed) {
+                SEND_STRING(PASS);
         }
         break;
     
