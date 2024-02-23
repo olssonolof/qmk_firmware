@@ -1,7 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "keymap_swedish.h"
 #include "sendstring_swedish.h"
-#include "secrets.h"
 
 
 enum sofle_layers {
@@ -13,6 +12,7 @@ enum sofle_layers {
     _NUMPAD
 };
 
+
 enum custom_keycodes {
     KC_QWERTY = SAFE_RANGE,
     KC_PRVWD,
@@ -22,11 +22,12 @@ enum custom_keycodes {
     KC_DLINE,
     MY_TILD,
     MY_BCKT,
-    MY_PASS,
     MY_CIRC
+
 };
 
 #define ___X___ _______
+
 
 
 
@@ -45,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            | LGUI | LAlt |LCTRL |LOWER | /Enter  /       \Space \  |RAISE | NUMPD| RAlt | RGUI |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
- */ 
+ */
 
 
 [_QWERTY] = LAYOUT(
@@ -72,10 +73,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
-  SE_QUOT,   SE_1,    SE_2,    SE_3,    SE_4,    SE_5,                       SE_6,    SE_7,    SE_8,    SE_9,    SE_0,KC_DEL,
-  SE_PIPE, SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL ,SE_QUES,
-  _______, MY_BCKT, SE_AT, KC_HASH,  KC_DLR, KC_PERC,                       MY_CIRC, KC_AMPR, SE_ASTR, KC_LPRN, SE_BSLS, MY_TILD,
-  _______, SE_LABK, KC_MINS, KC_PLUS, SE_LCBR, SE_RCBR, _______,       _______, SE_LBRC, SE_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
+  SE_QUOT,   SE_1,    SE_2,    SE_3,    SE_4,    SE_5,                       SE_6,    SE_7,    SE_8,    SE_9,  SE_0,KC_DEL,
+  LALT(KC_7), SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL ,SE_QUES,
+  _______, MY_BCKT, SE_AT, KC_HASH,  KC_DLR, KC_PERC,                       MY_CIRC, KC_AMPR, SE_ASTR, KC_LPRN, LSA(KC_7), MY_TILD,
+  _______, SE_LABK, KC_MINS, KC_PLUS, LSA(KC_8), LSA(KC_9), _______,       _______, SE_LBRC, SE_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
 /* RAISE
@@ -93,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
-  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, KC_F12,  
+  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, KC_F12,
   _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,   KC_UP, KC_NXTWD,KC_DLINE, KC_BSPC,
   _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, KC_CAPS,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
   _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND,   XXXXXXX, _______,
@@ -117,13 +118,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NUMPAD] = LAYOUT(
   SE_QUOT,   SE_1,    SE_2,    SE_3,    SE_4,    SE_5,                       SE_SLSH,    SE_7,    SE_8,    SE_9, SE_ASTR, SE_MINS,
   SE_PIPE, SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_SLSH, SE_4, SE_5, SE_6, SE_EQL , SE_PLUS,
-  _______, MY_BCKT, SE_AT, KC_HASH,  KC_DLR, KC_PERC,                       MY_CIRC, SE_1, SE_2, SE_3, SE_BSLS, MY_TILD,
+  _______, MY_BCKT, SE_AT, KC_HASH,  SE_DLR, SE_PERC,                       MY_CIRC, SE_1, SE_2, SE_3, SE_BSLS, MY_TILD,
   _______, SE_LABK, KC_MINS, KC_PLUS, SE_LCBR, SE_RCBR, _______,       _______, SE_LBRC, SE_0, KC_SCLN, KC_COLN, KC_BSLS, _______,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * | MYPASS|      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | QK_BOOT|      |QWERTY|    |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -136,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
   [_ADJUST] = LAYOUT(
-  MY_PASS , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   QK_BOOT  , XXXXXXX,KC_QWERTY,XXXXXXX,CG_TOGG,XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX,CG_TOGG, XXXXXXX,    XXXXXXX,  XXXXXXX,                     XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
@@ -243,12 +244,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         break;
 
-        case MY_PASS:
-            if (record->event.pressed) {
-                SEND_STRING(PASS);
-        }
-        break;
-    
+
         case KC_QWERTY:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_QWERTY);
