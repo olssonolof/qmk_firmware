@@ -6,3 +6,5 @@ for more options.
 */
 
 //#define SPLIT_HAND_PIN B7
+
+#define OLED_TIMEOUT 120000
