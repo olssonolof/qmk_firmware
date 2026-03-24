@@ -396,6 +396,14 @@ static const char *get_master_pet_active_frame(uint8_t frame) {
     }
 }
 
+static bool is_oled_idle_timed_out(void) {
+#if OLED_TIMEOUT > 0
+    return last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT;
+#else
+    return false;
+#endif
+}
+
 static void render_master_typing_animation(uint8_t start_row) {
     clear_master_pet_area(start_row);
 
@@ -433,7 +441,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 bool oled_task_user(void) {
 #if OLED_TIMEOUT > 0
-    if (last_input_activity_elapsed() > OLED_TIMEOUT) {
+    if (is_oled_idle_timed_out()) {
         oled_off();
         return false;
     }
