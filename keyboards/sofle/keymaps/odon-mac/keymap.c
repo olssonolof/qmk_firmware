@@ -64,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |  '   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  DEL |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  |   |   !  |   "  |   #  |   $  |   %  |                    |   &  |   /  |   (  |   )  |   =  |   ?  |
+ * |  ^   |   !  |   "  |   #  |   $  |   %  |                    |   &  |   /  |   (  |   )  |   =  |   ?  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   `  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   (  |   \  |   ~  |
+ * | Tab  |   `  |   @  |   #  |   $  |   %  |-------.    ,-------|   |  |   &  |   *  |   (  |   \  |   ~  |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * | Shift|  <   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   '  | Shift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -76,8 +76,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT(
   SE_QUOT,   SE_1,    SE_2,    SE_3,    SE_4,    SE_5,                       SE_6,    SE_7,    SE_8,    SE_9,  SE_0,KC_DEL,
-  LALT(KC_7), SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL ,SE_QUES,
-  _______, MY_BCKT, SE_AT, KC_HASH,  KC_DLR, KC_PERC,                       MY_CIRC, KC_AMPR, SE_ASTR, KC_LPRN, LSA(KC_7), MY_TILD,
+  MY_CIRC, SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL ,SE_QUES,
+  _______, MY_BCKT, SE_AT, KC_HASH,  KC_DLR, KC_PERC,                       LALT(KC_7), KC_AMPR, SE_ASTR, KC_LPRN, LSA(KC_7), MY_TILD,
   _______, SE_LABK, KC_MINS, KC_PLUS, LSA(KC_8), LSA(KC_9), _______,       _______, SE_LBRC, SE_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
@@ -107,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |  '   |   1  |   2  |   3  |   4  |   5  |                    |   /  |   7  |   8  |   9  |   *  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  |   |   !  |   "  |   #  |   $  |   %  |                    |   &  |   4  |   5  |   6  |   =  |   ?  |
+ * |  ^   |   !  |   "  |   #  |   $  |   %  |                    |   &  |   4  |   5  |   6  |   =  |   ?  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   `  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   1  |   2  |   3  |   \  |   ~  |
+ * | Tab  |   `  |   @  |   #  |   $  |   %  |-------.    ,-------|   |  |   1  |   2  |   3  |   \  |   ~  |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * | Shift|  <   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   0  |   ;  |   :  |   '  | Shift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -119,8 +119,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_NUMPAD] = LAYOUT(
   SE_QUOT,   SE_1,    SE_2,    SE_3,    SE_4,    SE_5,                       SE_SLSH,    SE_7,    SE_8,    SE_9, SE_ASTR, SE_MINS,
-  SE_PIPE, SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_SLSH, SE_4, SE_5, SE_6, SE_EQL , SE_PLUS,
-  _______, MY_BCKT, SE_AT, KC_HASH,  SE_DLR, SE_PERC,                       MY_CIRC, SE_1, SE_2, SE_3, SE_BSLS, MY_TILD,
+  MY_CIRC, SE_EXLM, SE_DQUO,  SE_HASH,  SE_DLR,  SE_PERC,                      SE_SLSH, SE_4, SE_5, SE_6, SE_EQL , SE_PLUS,
+  _______, MY_BCKT, SE_AT, KC_HASH,  SE_DLR, SE_PERC,                       SE_PIPE, SE_1, SE_2, SE_3, SE_BSLS, MY_TILD,
   _______, SE_LABK, KC_MINS, KC_PLUS, SE_LCBR, SE_RCBR, _______,       _______, SE_LBRC, SE_0, KC_SCLN, KC_COLN, KC_BSLS, _______,
                        _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______
 ),
